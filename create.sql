@@ -14,6 +14,12 @@ DNI INT NOT NULL,
 FECHA_INGRESO DATE NOT NULL,
 DOMICILIO_ID INT NOT NULL);
 
+DROP TABLE IF EXISTS odontologos;
+CREATE TABLE odontologos (ID INT AUTO_INCREMENT PRIMARY KEY,
+NOMBRE varchar(100) NOT NULL,
+APELLIDO varchar(100) NOT NULL,
+MATRICULA INT NOT NULL);
+
 INSERT INTO domicilios (calle, numero, localidad, provincia)
 VALUES ('Calle A',4741,'Salta Capital','Salta');
 INSERT INTO domicilios (calle, numero, localidad, provincia)
@@ -23,3 +29,8 @@ INSERT INTO pacientes (apellido, nombre, email, dni , fecha_ingreso, domicilio_i
 VALUES ('Baspineiro','Rodolfo','qwe@gmail.com',57182,'2022-03-01',1);
 INSERT INTO pacientes (apellido, nombre, email, dni , fecha_ingreso, domicilio_id)
 VALUES ('Baspineiro','Ezequiel','zxc@gmail.com',74851,'2022-03-15',2);
+
+INSERT INTO odontologos(nombre, apellido, matricula)
+VALUES ('Pedro', 'Piedras', 12312);
+INSERT INTO odontologos(nombre, apellido, matricula)
+VALUES ('Juan', 'Gomez', 43558);

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
@@ -17,15 +19,41 @@ public class PacienteController {
         this.pacienteService = pacienteService;
     }
 
-    @GetMapping("/index")
+    /*@GetMapping("/index")
     public String traerPaciente(Model model, @RequestParam("email") String email){
         Paciente paciente=pacienteService.buscarXEmail(email);
         model.addAttribute("nombre",paciente.getNombre());
         model.addAttribute("apellido",paciente.getApellido());
         return "index";
-    }
+    }*/
     @PostMapping
     public Paciente registrarPaciente(@RequestBody Paciente paciente){
+
         return pacienteService.guardar(paciente);
+    }
+
+    @PutMapping
+    public Paciente actualizarPaciente(@RequestBody Paciente paciente){
+        return pacienteService.actualizar(paciente);
+    }
+
+    @GetMapping("/{id}")
+    public Paciente buscarPaciente(@PathVariable("id") int id){
+        return pacienteService.buscar(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String eliminarPaciente(@PathVariable("id") int id){
+        String resp ="Error en el id ingresado";
+        if (pacienteService.buscar(id) != null){
+            pacienteService.eliminar(id);
+            resp = "Paciente con id "+id + " eliminado";
+        }
+        return resp;
+    }
+
+    @GetMapping
+    public List<Paciente> buscarPacientes(){
+        return pacienteService.listarPacientes();
     }
 }

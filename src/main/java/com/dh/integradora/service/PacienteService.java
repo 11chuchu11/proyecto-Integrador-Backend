@@ -32,6 +32,16 @@ public class PacienteService implements PacienteServiceInterface{
 
     @Override
     public Paciente actualizar(Paciente paciente) {
-        return pacienteIDao.guardar(paciente);
+        return pacienteIDao.actualizar(paciente);
+    }
+
+    @Override
+    public Paciente buscar(int id) {
+        return pacienteIDao.buscarId(id);
+    }
+
+    @Override
+    public void eliminar(int id) {
+        pacienteIDao.eliminar(id);
     }
 }

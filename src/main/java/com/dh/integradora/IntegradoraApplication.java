@@ -15,7 +15,7 @@ public class IntegradoraApplication {
 		try{
 			//conectarnos para crear la BD
 			Class.forName("org.h2.Driver").newInstance();
-			connection= DriverManager.getConnection("jdbc:h2:~/clase23;INIT=RUNSCRIPT FROM 'create.sql'","sa","sa");
+			connection= DriverManager.getConnection("jdbc:h2:~/integrador;INIT=RUNSCRIPT FROM 'create.sql'","sa","sa");
 		}
 		catch (Exception e){
 			e.printStackTrace();

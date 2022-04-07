@@ -10,4 +10,5 @@ public interface IDao<T>{
     //clase 25
     T guardar(T elemento);
     T actualizar(T elemento);
+    void eliminar(int id);
 }

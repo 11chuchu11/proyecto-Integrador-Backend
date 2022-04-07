@@ -11,4 +11,7 @@ public interface PacienteServiceInterface {
     //clase 25
     Paciente guardar(Paciente paciente);
     Paciente actualizar(Paciente paciente);
+
+    Paciente buscar(int id);
+    void eliminar(int id);
 }

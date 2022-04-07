@@ -12,7 +12,7 @@ public class PacienteDAOH2 implements IDao<Paciente>{
     //obtener la conexión
     private static Connection getConnection() throws Exception{
         Class.forName("org.h2.Driver").newInstance();
-        return DriverManager.getConnection("jdbc:h2:~/clase23","sa","sa");
+        return DriverManager.getConnection("jdbc:h2:~/integrador","sa","sa");
     }
 
     @Override
@@ -52,7 +52,33 @@ public class PacienteDAOH2 implements IDao<Paciente>{
 
     @Override
     public Paciente buscarId(int id) {
-        return null;
+        Connection connection=null;
+        Paciente paciente=null;
+        Domicilio domicilio = null;
+
+        try{
+            DomicilioDAOH2 domicilioDAOH2 = new DomicilioDAOH2();
+            connection=getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement("SELECT * FROM pacientes WHERE ID=?");
+            preparedStatement.setInt(1,id);
+            ResultSet rs=preparedStatement.executeQuery();
+            while (rs.next()){
+                domicilio=domicilioDAOH2.buscarId(rs.getInt(7));
+                paciente= new Paciente(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5), rs.getDate(6).toLocalDate(), domicilio);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try{
+                connection.close();
+            }
+            catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+        return paciente;
     }
 
     @Override
@@ -128,6 +154,54 @@ public class PacienteDAOH2 implements IDao<Paciente>{
 
     @Override
     public Paciente actualizar(Paciente elemento) {
-        return null;
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            DomicilioDAOH2 domicilioDAOH2 = new DomicilioDAOH2();
+
+            Domicilio domicilio = domicilioDAOH2.actualizar(elemento.getDomicilio());
+
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE pacientes SET nombre = ?, " +
+                    "apellido = ? , email = ?, dni = ?, fecha_ingreso = ?, domicilio_id = ? WHERE id=?");
+            preparedStatement.setString(1, elemento.getNombre());
+            preparedStatement.setString(2, elemento.getApellido());
+            preparedStatement.setString(3, elemento.getEmail());
+            preparedStatement.setInt(4, elemento.getDni());
+            preparedStatement.setDate(5, Date.valueOf(elemento.getFechaIngreso()));
+            preparedStatement.setInt(6, elemento.getDomicilio().getId());
+            preparedStatement.setInt(7,elemento.getId());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return elemento;
+
+    }
+
+    @Override
+    public void eliminar(int id) {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM pacientes WHERE id=?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }
