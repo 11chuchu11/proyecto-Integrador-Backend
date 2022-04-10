@@ -19,4 +19,16 @@ public class TurnoService {
     public List<Turno> listTurno(){
         return turnoIDao.listarElementos();
     }
+
+    public void eliminar(int id){
+        turnoIDao.eliminar(id);
+    }
+
+    public Turno actualizar(Turno turno){
+        return turnoIDao.actualizar(turno);
+    }
+
+    public Turno buscar(int id){
+        return turnoIDao.buscarId(id);
+    }
 }

@@ -16,9 +16,10 @@ public class TurnoLista implements IDao<Turno>{
         turnos = new ArrayList<>();
         PacienteDAOH2 pacienteDAOH2 = new PacienteDAOH2();
         OdontologoDAOH2 odontologoDAOH2 = new OdontologoDAOH2();
-        Paciente paciente = pacienteDAOH2.buscarId(1);
-        Odontologo odontologo = odontologoDAOH2.buscarId(1);
+        Paciente paciente = pacienteDAOH2.buscarId(2);
+        Odontologo odontologo = odontologoDAOH2.buscarId(2);
         Turno turnoInicial = new Turno(1,paciente, odontologo, LocalDate.of(2022,03,01));
+        turnos.add(turnoInicial);
     }
 
     @Override
@@ -59,6 +60,7 @@ public class TurnoLista implements IDao<Turno>{
         for (Turno turno:turnos ){
             if (turno.getId()==id){
                 turnos.remove(turno);
+                return;
             }
         }
     }

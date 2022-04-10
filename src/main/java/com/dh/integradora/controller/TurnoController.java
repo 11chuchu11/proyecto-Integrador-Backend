@@ -38,4 +38,28 @@ public class TurnoController {
         }
         return respuesta;
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable int id){
+        ResponseEntity<String> response;
+        if(turnoService.buscar(id) != null){
+            turnoService.eliminar(id);
+            response = ResponseEntity.status(HttpStatus.OK).body("Turno con id="+id+" ha sido eliminado");
+        }else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro un turno con el id="+id);
+        }
+        return response;
+    }
+
+    @PutMapping
+    public ResponseEntity<Turno> actualizarOdontolog(@RequestBody Turno turno ){
+        ResponseEntity<Turno> response;
+
+        if (turnoService.actualizar(turno) != null){
+            response = ResponseEntity.ok(turno);
+        }else {
+            response = ResponseEntity.badRequest().build();
+        }
+        return response;
+    }
 }
