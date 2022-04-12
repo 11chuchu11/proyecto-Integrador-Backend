@@ -13,12 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/odontologos")
 public class OdontologoController {
-    private final OdontologoService odontologoService;
+
+    @Autowired
+    private OdontologoService odontologoService;
+
+    /*private final OdontologoService odontologoService;
 
     @Autowired
     public OdontologoController(OdontologoService odontologoService){
         this.odontologoService = odontologoService;
-    }
+    }*/
 
 
     @PostMapping

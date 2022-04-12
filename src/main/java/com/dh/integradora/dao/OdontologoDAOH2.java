@@ -2,11 +2,12 @@ package com.dh.integradora.dao;
 
 import com.dh.integradora.dominio.Odontologo;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-@Component
+@Repository
 public class OdontologoDAOH2 implements IDao<Odontologo>{
 
     private static Connection getConnection() throws Exception{

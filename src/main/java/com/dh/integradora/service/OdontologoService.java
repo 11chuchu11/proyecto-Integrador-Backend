@@ -3,6 +3,7 @@ package com.dh.integradora.service;
 import com.dh.integradora.dao.IDao;
 import com.dh.integradora.dominio.Odontologo;
 import com.dh.integradora.service.OdontologoServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +11,8 @@ import java.util.List;
 @Service
 public class OdontologoService implements OdontologoServiceInterface {
 
+    @Autowired
     private IDao<Odontologo> odontologoIDao;
-
-    public OdontologoService(IDao<Odontologo> odontologoIDao){
-        this.odontologoIDao = odontologoIDao;
-    }
 
     @Override
     public List<Odontologo> listarOdontologos() {

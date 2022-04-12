@@ -3,11 +3,12 @@ package com.dh.integradora.dao;
 import com.dh.integradora.dominio.Domicilio;
 import com.dh.integradora.dominio.Paciente;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-@Component
+@Repository
 public class PacienteDAOH2 implements IDao<Paciente>{
     //obtener la conexión
     private static Connection getConnection() throws Exception{

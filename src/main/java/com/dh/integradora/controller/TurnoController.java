@@ -9,6 +9,7 @@ import com.dh.integradora.dominio.Turno;
 import com.dh.integradora.service.OdontologoService;
 import com.dh.integradora.service.PacienteService;
 import com.dh.integradora.service.TurnoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/turnos")
 public class TurnoController {
-    private PacienteService pacienteService = new PacienteService(new PacienteDAOH2());
-    private OdontologoService odontologoService = new OdontologoService(new OdontologoDAOH2());
-    private TurnoService turnoService=new TurnoService(new TurnoLista());
+    @Autowired
+    private PacienteService pacienteService;
+    @Autowired
+    private OdontologoService odontologoService ;
+    @Autowired
+    private TurnoService turnoService;
     @GetMapping
     public ResponseEntity<List<Turno>> listarTurnos(){
         return ResponseEntity.ok(turnoService.listTurno());

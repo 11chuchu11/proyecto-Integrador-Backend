@@ -2,16 +2,15 @@ package com.dh.integradora.service;
 
 import com.dh.integradora.dao.IDao;
 import com.dh.integradora.dominio.Paciente;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class PacienteService implements PacienteServiceInterface{
-    private IDao<Paciente> pacienteIDao;
 
-    public PacienteService(IDao<Paciente> pacienteIDao) {
-        this.pacienteIDao = pacienteIDao;
-    }
+    @Autowired
+    private IDao<Paciente> pacienteIDao;
 
     @Override
     public List<Paciente> listarPacientes() {

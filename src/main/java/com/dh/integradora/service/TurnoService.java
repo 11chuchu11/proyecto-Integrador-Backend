@@ -2,15 +2,15 @@ package com.dh.integradora.service;
 
 import com.dh.integradora.dao.IDao;
 import com.dh.integradora.dominio.Turno;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TurnoService {
+    @Autowired
     private IDao<Turno> turnoIDao;
-
-    public TurnoService(IDao<Turno> turnoIDao){
-        this.turnoIDao = turnoIDao;
-    }
 
     public Turno registrarTurno(Turno turno){
         return turnoIDao.guardar(turno);
